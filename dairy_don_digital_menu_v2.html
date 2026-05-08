@@ -1,0 +1,353 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --pp: #A020A0; --pp-light: #C040C0; --pp-pale: #F5E6F5;
+    --pk: #FF4FA3; --pk-light: #FFD6EC; --cream: #FDF8FF;
+    --lav: #F0E6FF; --white: #ffffff;
+    --text-dark: #1a0a1a; --text-mid: #5a3a5a; --text-muted: #9a7a9a;
+    --border: rgba(160,32,160,0.15); --shadow: rgba(160,32,160,0.10);
+  }
+  #dd-app {
+    font-family: 'Nunito', sans-serif;
+    background: var(--cream);
+    width: 100%; max-width: 390px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .dd-screen { display: none; flex-direction: column; min-height: 580px; }
+  .dd-screen.active { display: flex; }
+
+  /* S1 LANDING */
+  #dd-s1 {
+    background: linear-gradient(160deg, #1a0030 0%, #3a0060 40%, #6a1080 70%, #A020A0 100%);
+    align-items: center; justify-content: center; text-align: center;
+    padding: 2.5rem 1.5rem; gap: 0;
+  }
+  .dd-logo-ring {
+    width: 96px; height: 96px; border-radius: 50%;
+    background: rgba(255,255,255,0.10);
+    border: 1.5px solid rgba(255,255,255,0.22);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.4rem;
+  }
+  .dd-logo-ring i { font-size: 40px; color: #FFD6EC; }
+  .dd-brand { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 600; color: #fff; letter-spacing: 2px; margin-bottom: 3px; }
+  .dd-brand-sub { font-size: 10px; font-weight: 400; color: rgba(255,255,255,0.45); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1.8rem; }
+  .dd-tagline { font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65); letter-spacing: 2px; margin-bottom: 2.8rem; }
+  .dd-tagline span { color: #FF4FA3; font-weight: 600; }
+  .dd-btn-primary {
+    background: linear-gradient(135deg, #FF4FA3, #A020A0);
+    color: #fff; border: none; padding: 15px 0;
+    border-radius: 50px; font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.5px;
+    cursor: pointer; width: 100%; max-width: 260px;
+    display: block; text-align: center;
+  }
+  .dd-footer { margin-top: 2rem; font-size: 10px; color: rgba(255,255,255,0.28); letter-spacing: 1px; }
+
+  /* S2 LANGUAGE */
+  #dd-s2 { background: var(--cream); align-items: center; justify-content: center; padding: 2rem 1.5rem; }
+  .dd-screen-logo { text-align: center; margin-bottom: 1.8rem; }
+  .dd-screen-logo i { font-size: 30px; color: var(--pp); }
+  .dd-screen-logo .dd-sn { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--pp); margin-top: 4px; }
+  .dd-lang-title { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.8rem; text-align: center; }
+  .dd-lang-cards { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 310px; }
+  .dd-lang-card {
+    background: var(--white); border: 1.5px solid var(--border); border-radius: 16px;
+    padding: 18px 20px; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .dd-lang-card:active { background: var(--lav); border-color: var(--pp); }
+  .dd-lang-left { display: flex; align-items: center; gap: 12px; }
+  .dd-lang-flag { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--pp-pale), var(--pk-light)); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .dd-lang-name { font-size: 16px; font-weight: 700; color: var(--text-dark); }
+  .dd-lang-native { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+  .dd-back-link { margin-top: 1.5rem; font-size: 12px; color: var(--text-muted); cursor: pointer; text-align: center; }
+
+  /* TOPBAR */
+  .dd-topbar {
+    background: var(--white); border-bottom: 1px solid var(--border);
+    padding: 14px 16px 12px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0; position: sticky; top: 0; z-index: 10;
+  }
+  .dd-tb-back { cursor: pointer; color: var(--pp); display: flex; align-items: center; gap: 3px; font-size: 13px; font-weight: 700; -webkit-tap-highlight-color: transparent; }
+  .dd-tb-back i { font-size: 18px; }
+  .dd-tb-brand { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--pp); font-weight: 600; }
+  .dd-tb-lang { font-size: 11px; font-weight: 700; color: var(--white); background: var(--pp); padding: 5px 11px; border-radius: 20px; cursor: pointer; letter-spacing: 0.5px; -webkit-tap-highlight-color: transparent; }
+
+  /* S3 CATEGORIES */
+  #dd-s3 { background: var(--cream); }
+  .dd-scroll { overflow-y: auto; flex: 1; padding: 16px 14px 20px; }
+  .dd-sec-head { font-size: 10px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+  .dd-cat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+  .dd-cat-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 14px;
+    padding: 16px 12px; cursor: pointer;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 7px;
+    min-height: 84px; -webkit-tap-highlight-color: transparent;
+  }
+  .dd-cat-card:active { background: var(--lav); border-color: var(--pp); }
+  .dd-cat-icon { width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(135deg, var(--pp-pale), var(--pk-light)); display: flex; align-items: center; justify-content: center; }
+  .dd-cat-icon i { font-size: 17px; color: var(--pp); }
+  .dd-cat-name { font-size: 12px; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+  .dd-cat-count { font-size: 9px; color: var(--text-muted); }
+
+  /* S4 PRODUCTS */
+  #dd-s4 { background: var(--cream); }
+  .dd-cat-hero {
+    background: linear-gradient(135deg, var(--pp) 0%, #5010A0 100%);
+    padding: 18px 18px 22px; flex-shrink: 0;
+  }
+  .dd-hero-icon-wrap { width: 42px; height: 42px; border-radius: 11px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; margin-bottom: 9px; }
+  .dd-hero-icon-wrap i { font-size: 21px; color: #fff; }
+  .dd-hero-name { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; font-weight: 600; }
+  .dd-hero-sub { font-size: 11px; color: rgba(255,255,255,0.58); margin-top: 2px; }
+  .dd-items-list { overflow-y: auto; flex: 1; padding: 14px 14px 10px; display: flex; flex-direction: column; gap: 0; }
+  .dd-item-card {
+    background: var(--white); border-radius: 12px; padding: 13px 14px;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 7px; border: 1px solid var(--border);
+  }
+  .dd-item-left { flex: 1; }
+  .dd-item-name { font-size: 13px; font-weight: 700; color: var(--text-dark); line-height: 1.3; }
+  .dd-item-badge { display: inline-block; background: var(--pk-light); color: var(--pp); font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 20px; margin-top: 3px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .dd-item-price { font-size: 15px; font-weight: 800; color: var(--pp); white-space: nowrap; margin-left: 10px; }
+  .dd-item-price span { font-size: 9px; font-weight: 400; color: var(--text-muted); }
+  .dd-lang-bar { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 14px; background: var(--white); border-top: 1px solid var(--border); flex-shrink: 0; }
+  .dd-lt-btn { font-size: 11px; font-weight: 700; padding: 6px 16px; border-radius: 20px; border: 1.5px solid var(--border); cursor: pointer; background: transparent; color: var(--text-mid); font-family: 'Nunito', sans-serif; -webkit-tap-highlight-color: transparent; }
+  .dd-lt-btn.active { background: var(--pp); color: #fff; border-color: var(--pp); }
+</style>
+
+<div id="dd-app">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Dairy Don digital menu</h2>
+
+  <!-- S1: LANDING -->
+  <div id="dd-s1" class="dd-screen active">
+    <div class="dd-logo-ring"><i class="ti ti-ice-cream" aria-hidden="true"></i></div>
+    <div class="dd-brand">DAIRY DON</div>
+    <div class="dd-brand-sub">Premium Desserts &amp; Beverages</div>
+    <div class="dd-tagline"><span>Richer</span> &nbsp;•&nbsp; <span>Creamier</span> &nbsp;•&nbsp; <span>Tastier</span></div>
+    <button class="dd-btn-primary" id="btn-continue">Tap to Continue &nbsp;→</button>
+    <div class="dd-footer">Scan QR • Open Menu • Enjoy</div>
+  </div>
+
+  <!-- S2: LANGUAGE -->
+  <div id="dd-s2" class="dd-screen">
+    <div class="dd-screen-logo">
+      <i class="ti ti-ice-cream" aria-hidden="true"></i>
+      <div class="dd-sn">Dairy Don</div>
+    </div>
+    <div class="dd-lang-title">Select Language / ભાષા પસંદ કરો</div>
+    <div class="dd-lang-cards">
+      <div class="dd-lang-card" id="btn-en">
+        <div class="dd-lang-left">
+          <div class="dd-lang-flag">🇬🇧</div>
+          <div>
+            <div class="dd-lang-name">English</div>
+            <div class="dd-lang-native">Continue in English</div>
+          </div>
+        </div>
+        <i class="ti ti-chevron-right" style="color:var(--pp)" aria-hidden="true"></i>
+      </div>
+      <div class="dd-lang-card" id="btn-gu">
+        <div class="dd-lang-left">
+          <div class="dd-lang-flag">🇮🇳</div>
+          <div>
+            <div class="dd-lang-name">ગુજરાતી</div>
+            <div class="dd-lang-native">ગુજરાતીમાં આગળ વધો</div>
+          </div>
+        </div>
+        <i class="ti ti-chevron-right" style="color:var(--pp)" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="dd-back-link" id="btn-back-s2">← Back</div>
+  </div>
+
+  <!-- S3: CATEGORIES -->
+  <div id="dd-s3" class="dd-screen">
+    <div class="dd-topbar">
+      <div class="dd-tb-back" id="btn-back-s3"><i class="ti ti-arrow-left" aria-hidden="true"></i> <span id="lbl-back3">Back</span></div>
+      <div class="dd-tb-brand">Dairy Don</div>
+      <div class="dd-tb-lang" id="lbl-toggle3">ગુ</div>
+    </div>
+    <div class="dd-scroll">
+      <div class="dd-sec-head" id="lbl-cathead">Our Menu</div>
+      <div class="dd-cat-grid" id="dd-cat-grid"></div>
+    </div>
+  </div>
+
+  <!-- S4: PRODUCTS -->
+  <div id="dd-s4" class="dd-screen">
+    <div class="dd-topbar">
+      <div class="dd-tb-back" id="btn-back-s4"><i class="ti ti-arrow-left" aria-hidden="true"></i> <span id="lbl-back4">Menu</span></div>
+      <div class="dd-tb-brand" id="lbl-s4title">Category</div>
+      <div class="dd-tb-lang" id="lbl-toggle4">ગુ</div>
+    </div>
+    <div class="dd-cat-hero">
+      <div class="dd-hero-icon-wrap"><i class="ti ti-ice-cream" id="dd-hero-icon" aria-hidden="true"></i></div>
+      <div class="dd-hero-name" id="dd-hero-name">Category</div>
+      <div class="dd-hero-sub" id="dd-hero-sub">Premium Selection</div>
+    </div>
+    <div class="dd-items-list" id="dd-items-list"></div>
+    <div class="dd-lang-bar">
+      <button class="dd-lt-btn active" id="lt-en">English</button>
+      <button class="dd-lt-btn" id="lt-gu">ગુજરાતી</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var lang = 'en';
+  var curCat = 0;
+
+  var T = {
+    en: {
+      back: 'Back', menu: 'Menu', catHead: 'Our Menu',
+      cats: ['Coco','Lassi','Milk Shake','Hot Brownie','Juice','Premium Gelato','Premium Mastani','Thick Shake','Ice Cream','Add Ons'],
+      subs: ['Rich Chocolate Beverages','Refreshing Yogurt Drinks','Classic Blended Shakes','Warm Dessert','Fresh Fruit Juices','Italian-style Ice Cream','Royal Cream Dessert','Indulgent Thick Blends','Scooped to Order','Elevate Your Dessert'],
+      seasonal: 'Seasonal', cur: '₹'
+    },
+    gu: {
+      back: 'પાછળ', menu: 'મેનૂ', catHead: 'અમારો મેનૂ',
+      cats: ['કોકો','લસ્સી','મિલ્ક શેક','હોટ બ્રાઉની','જ્યૂસ','પ્રિ. જેલાટો','પ્રિ. માસ્તાની','થિક શેક','આઈ.ક્રીમ','એડ ઓન્સ'],
+      subs: ['રિચ ચૉકલેટ','દહીં પીણા','ક્લાસિક બ્લેન્ડ','ગરમ ડેઝર્ટ','ફ્રૂટ જ્યૂસ','ઇટા. આઈ.ક્રીમ','રૉ. ક્રીમ','થિક બ્લેન્ડ','સ્કૂપ','ડેઝ. અપગ્રેડ'],
+      seasonal: 'સિઝ.', cur: '₹'
+    }
+  };
+
+  var icons = ['ti-cup','ti-droplet','ti-blender','ti-flame','ti-lemon','ti-snowflake','ti-crown','ti-glass','ti-ice-cream','ti-plus-circle'];
+
+  var menuData = [
+    { en:['Couple Coco','Chocolate Swirl Coco','Kit Kat Coco','Brownie Coco','Roasted Almond Coco','Coco With Ice Cream','Coco Crunch','Kaju Coco','Rich Coco'],
+      gu:['કપલ કોકો','ચૉ. સ્વર્લ કોકો','કિટ કેટ કોકો','બ્રાઉની કોકો','આ. આલ્મંડ કોકો','આઈ.ક્રી. કોકો','કોકો ક્રન્ચ','કાજુ કોકો','રિચ કોકો'],
+      prices:[200,160,120,120,110,110,100,110,80], seasonal:[] },
+    { en:['Sp. Lassi','Mango Lassi','Kaju Mango Lassi','Lassi'],
+      gu:['સ્પ. લસ્સી','મૅ. લસ્સી','કા. મૅ. લસ્સી','લસ્સી'],
+      prices:[120,80,100,70], seasonal:[] },
+    { en:['Sp. Don','Sp. Dry Fruit','Biscoff','Oreo Chocolate','Sitafal','Kaju Anjeer','Badam Anjeer','Kaju Chocolate','Kaju Gulkand','Kaju Badam','Kaju Khajur','Sp. Kaju','Coconut','Chikoo','Mango'],
+      gu:['સ્પ. ડૉન','સ્પ. ડ્ર. ફ્રૂ.','બિસ્કૉ.','ઓ. ચૉ.','સીત.','કા. અ.','બ. અ.','કા. ચૉ.','કા. ગ.','કા. બ.','કા. ખ.','સ્પ. કા.','નારિ.','ચીકૂ','કેરી'],
+      prices:[200,180,180,150,150,150,150,150,150,150,150,150,150,120,120], seasonal:[4] },
+    { en:['Hot Brownie Vanilla Scoop','Hot Brownie Chocolate Scoop'],
+      gu:['હૉ. બ્રા. વૅ. સ્કૂ.','હૉ. બ્રા. ચૉ. સ્કૂ.'],
+      prices:[150,160], seasonal:[] },
+    { en:['Jamun Juice'],
+      gu:['જામુન જ્યૂસ'],
+      prices:[130], seasonal:[] },
+    { en:['Hazelnut Chocolate','Mango Strawberry','Afghan Mewa','Biscoff','Sitafal','Pan Masala'],
+      gu:['હેઝ. ચૉ.','મૅ. સ્ટ્રૉ.','અ. મેવો','બિ.','સી.','પાન'],
+      prices:[120,90,100,100,80,80], seasonal:[], suffix:'/scoop' },
+    { en:['Tender Coconut','Anjeer','Mango','Strawberry','Chocolate','Vanilla'],
+      gu:['ટૅ. ના.','અંજીર','કેરી','સ્ટ્રૉ.','ચૉ.','વૅ.'],
+      prices:[200,180,180,180,180,170], seasonal:[] },
+    { en:['Lotus','Galaxy','Oreo','Biscoff','Gulkand Rose','Kaju Anjeer','Mango','Chikoo','Strawberry','Butterscotch'],
+      gu:['લૉ.','ગૅ.','ઓ.','બિ.','ગ. રો.','કા. અ.','કેરી','ચી.','સ્ટ્રૉ.','બ. સ.'],
+      prices:[180,180,150,160,150,160,140,140,140,140], seasonal:[] },
+    { en:['Vanilla','Chocolate','Kaju Draksh','Kaju Anjeer','Kaju Gulkand','Black Current','Mava Malai','Rajbhog','Gulabri','Chocolate Chips','Butter Scotch','Cookie Cream'],
+      gu:['વૅ.','ચૉ.','કા. દ.','કા. અ.','કા. ગ.','બ્લૅ. ક.','મા. મ.','રા.','ગ.','ચૉ. ચ.','બ.સ.','કૂ. ક.'],
+      prices:[50,50,70,70,70,70,80,70,80,70,70,80], seasonal:[], suffix:'/scoop' },
+    { en:['Ice Cream','KitKat','Kaju','Chocolate Chips'],
+      gu:['આઈ. ક્રી.','કિ. કૅ.','કાજુ','ચૉ. ચ.'],
+      prices:[40,40,30,30], seasonal:[] }
+  ];
+
+  function goTo(id) {
+    var screens = document.querySelectorAll('.dd-screen');
+    for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
+    document.getElementById(id).classList.add('active');
+  }
+
+  function applyLang(l) {
+    lang = l;
+    var t = T[lang];
+    var el;
+    el = document.getElementById('lbl-back3'); if (el) el.textContent = t.back;
+    el = document.getElementById('lbl-back4'); if (el) el.textContent = t.menu;
+    el = document.getElementById('lbl-cathead'); if (el) el.textContent = t.catHead;
+    el = document.getElementById('lbl-toggle3'); if (el) el.textContent = lang==='en' ? 'ગુ' : 'EN';
+    el = document.getElementById('lbl-toggle4'); if (el) el.textContent = lang==='en' ? 'ગુ' : 'EN';
+    el = document.getElementById('lt-en'); if (el) el.classList.toggle('active', lang==='en');
+    el = document.getElementById('lt-gu'); if (el) el.classList.toggle('active', lang==='gu');
+    renderCats();
+    renderItems(curCat);
+    var s4t = document.getElementById('lbl-s4title');
+    if (s4t) s4t.textContent = t.cats[curCat];
+    var hn = document.getElementById('dd-hero-name');
+    if (hn) hn.textContent = t.cats[curCat];
+    var hs = document.getElementById('dd-hero-sub');
+    if (hs) hs.textContent = t.subs[curCat];
+  }
+
+  function renderCats() {
+    var t = T[lang];
+    var grid = document.getElementById('dd-cat-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    for (var i = 0; i < t.cats.length; i++) {
+      (function(idx) {
+        var card = document.createElement('div');
+        card.className = 'dd-cat-card';
+        card.innerHTML = '<div class="dd-cat-icon"><i class="ti ' + icons[idx] + '" aria-hidden="true"></i></div>' +
+          '<div><div class="dd-cat-name">' + t.cats[idx] + '</div>' +
+          '<div class="dd-cat-count">' + menuData[idx].prices.length + ' items</div></div>';
+        card.addEventListener('click', function() { openCat(idx); });
+        grid.appendChild(card);
+      })(i);
+    }
+  }
+
+  function openCat(i) {
+    curCat = i;
+    var t = T[lang];
+    var el;
+    el = document.getElementById('lbl-s4title'); if (el) el.textContent = t.cats[i];
+    el = document.getElementById('dd-hero-name'); if (el) el.textContent = t.cats[i];
+    el = document.getElementById('dd-hero-sub'); if (el) el.textContent = t.subs[i];
+    el = document.getElementById('dd-hero-icon'); if (el) el.className = 'ti ' + icons[i];
+    renderItems(i);
+    goTo('dd-s4');
+  }
+
+  function renderItems(i) {
+    var t = T[lang];
+    var data = menuData[i];
+    var names = data[lang];
+    var list = document.getElementById('dd-items-list');
+    if (!list) return;
+    list.innerHTML = '';
+    for (var j = 0; j < names.length; j++) {
+      var card = document.createElement('div');
+      card.className = 'dd-item-card';
+      var isSeas = data.seasonal && data.seasonal.indexOf(j) !== -1;
+      var suf = data.suffix || '';
+      card.innerHTML = '<div class="dd-item-left">' +
+        '<div class="dd-item-name">' + names[j] + '</div>' +
+        (isSeas ? '<span class="dd-item-badge">' + t.seasonal + '</span>' : '') +
+        '</div>' +
+        '<div class="dd-item-price">₹' + data.prices[j] + '<span>' + suf + '</span></div>';
+      list.appendChild(card);
+    }
+  }
+
+  // Wire up buttons after DOM is ready
+  function init() {
+    document.getElementById('btn-continue').addEventListener('click', function() { goTo('dd-s2'); });
+    document.getElementById('btn-en').addEventListener('click', function() { applyLang('en'); goTo('dd-s3'); });
+    document.getElementById('btn-gu').addEventListener('click', function() { applyLang('gu'); goTo('dd-s3'); });
+    document.getElementById('btn-back-s2').addEventListener('click', function() { goTo('dd-s1'); });
+    document.getElementById('btn-back-s3').addEventListener('click', function() { goTo('dd-s2'); });
+    document.getElementById('btn-back-s4').addEventListener('click', function() { goTo('dd-s3'); });
+    document.getElementById('lbl-toggle3').addEventListener('click', function() { applyLang(lang==='en'?'gu':'en'); });
+    document.getElementById('lbl-toggle4').addEventListener('click', function() { applyLang(lang==='en'?'gu':'en'); });
+    document.getElementById('lt-en').addEventListener('click', function() { applyLang('en'); });
+    document.getElementById('lt-gu').addEventListener('click', function() { applyLang('gu'); });
+    renderCats();
+  }
+
+  init();
+})();
+</script>
